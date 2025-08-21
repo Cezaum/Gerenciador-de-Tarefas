@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Delivery Control</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme"> <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Demandas</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-view="tasks-view"><span>📅</span> Tarefas do Dia</a>
+                <a href="#" class="nav-link" data-view="calendar-view"><span>🗓️</span> Calendário</a>
+                <a href="#" class="nav-link" data-view="stats-view"><span>📊</span> Estatísticas</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="import-export">
+                    <button id="export-btn" class="io-btn">Exportar Backup (Salvar)</button>
+                    <label for="import-file" class="io-btn">Importar Backup (Carregar)</label>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                </div>
+                <div class="theme-switcher">
+                    <span>☀️</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>🌙</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <section id="tasks-view" class="view active">
+                <header class="content-header">
+                    <div class="title-date-picker">
+                        <h1 id="view-title">Tarefas para hoje</h1>
+                        <input type="date" id="date-picker-input" class="date-picker-input">
+                    </div>
+                    <div id="daily-counters"></div>
+                </header>
+
+                <div class="form-and-list-container">
+                    <div class="task-form-wrapper">
+                        <h3>Adicionar Nova Demanda</h3>
+                        <form id="new-task-form">
+                            <input type="text" id="new-task-input" placeholder="Nome da demanda..." required autocomplete="off" />
+                            <textarea id="new-task-description" placeholder="Descrição: passo a passo, dependências, etc..."></textarea>
+                            <div class="form-row">
+                                <select id="task-type-select" required>
+                                    <option value="diaria" selected>Diária (Recorrente)</option>
+                                    <option value="unica">Única (Data Específica)</option>
+                                </select>
+                                <select id="task-tag-select" required>
+                                    <option value="geral" selected>Geral</option>
+                                    <option value="powerbi">Power BI</option>
+                                    <option value="sql">SQL</option>
+                                    <option value="excel">Excel</option>
+                                    <option value="desenvolvimento">Desenvolvimento</option>
+                                </select>
+                            </div>
+                            <button type="submit" id="add-task-btn">Adicionar Demanda</button>
+                        </form>
+                    </div>
+                    <div class="task-list-wrapper">
+                        <ul id="task-list"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="calendar-view" class="view">
+                 <header class="content-header"><h1>Calendário de Atividades</h1></header>
+                 <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button id="prev-month-btn">&lt;</button>
+                        <h2 id="month-year-display"></h2>
+                        <button id="next-month-btn">&gt;</button>
+                    </div>
+                    <div class="calendar-weekdays"><div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div></div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+            </section>
+
+            <section id="stats-view" class="view">
+                <header class="content-header"><h1>Estatísticas de Desempenho</h1></header>
+                <div id="stats-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="task-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-btn">&times;</button>
+            <h2 id="modal-task-title"></h2>
+            <p id="modal-task-tag"></p>
+            <h3>Descrição</h3>
+            <p id="modal-task-description"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
